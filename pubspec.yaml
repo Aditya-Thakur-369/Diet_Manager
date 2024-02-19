@@ -39,6 +39,7 @@ dependencies:
   google_fonts: ^6.1.0
   iconsax: ^0.0.8
   palette_generator: ^0.3.3+3
+  slider_button: ^2.1.0
 
 dev_dependencies:
   flutter_test:
