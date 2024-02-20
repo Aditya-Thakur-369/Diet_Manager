@@ -29,49 +29,92 @@ class _HomeScreenState extends State<HomeScreen> {
     "August",
   ];
   List<Widget> screens = [
-    DetailsScreen(),
-    const Center(
-      child: Text("Center2"),
-    ),
-    const Center(
-      child: Text("Center3"),
-    ),
-    const Center(
-      child: Text("Center4"),
-    ),
-    const Center(
-      child: Text("Center5"),
-    ),
-    const Center(
-      child: Text("Center6"),
-    ),
-    const Center(
-      child: Text("Center7"),
-    ),
-    const Center(
-      child: Text("Center8"),
-    ),
-    const Center(
-      child: Text("Center9"),
-    ),
-    const Center(
-      child: Text("Center12"),
-    ),
-    const Center(
-      child: Text("Center11"),
-    ),
-    const Center(
-      child: Text("Center12"),
-    ),
+    DetailsScreen(
+        value1: '34.5',
+        height1: 120.0,
+        value2: '15.4',
+        height2: 80,
+        value3: '8.3',
+        height3: 30),
+    DetailsScreen(
+        value1: '27.6',
+        height1: 80.0,
+        value2: '12.3',
+        height2: 20,
+        value3: '30.1',
+        height3: 100),
+    DetailsScreen(
+        value1: '30.5',
+        height1: 90.0,
+        value2: '12.4',
+        height2: 60,
+        value3: '40.3',
+        height3: 130),
+    DetailsScreen(
+        value1: '27.5',
+        height1: 77.0,
+        value2: '36.4',
+        height2: 120,
+        value3: '8.3',
+        height3: 5),
+    DetailsScreen(
+        value1: '34.5',
+        height1: 120.0,
+        value2: '15.4',
+        height2: 80,
+        value3: '8.3',
+        height3: 30),
+    DetailsScreen(
+        value1: '34.5',
+        height1: 120.0,
+        value2: '15.4',
+        height2: 80,
+        value3: '8.3',
+        height3: 30),
+    DetailsScreen(
+        value1: '34.5',
+        height1: 120.0,
+        value2: '15.4',
+        height2: 80,
+        value3: '8.3',
+        height3: 30),
+    DetailsScreen(
+        value1: '34.5',
+        height1: 120.0,
+        value2: '15.4',
+        height2: 80,
+        value3: '8.3',
+        height3: 30),
+    DetailsScreen(
+        value1: '34.5',
+        height1: 120.0,
+        value2: '15.4',
+        height2: 80,
+        value3: '8.3',
+        height3: 30),
+    DetailsScreen(
+        value1: '34.5',
+        height1: 120.0,
+        value2: '15.4',
+        height2: 80,
+        value3: '8.3',
+        height3: 30),
+    DetailsScreen(
+        value1: '34.5',
+        height1: 120.0,
+        value2: '15.4',
+        height2: 80,
+        value3: '8.3',
+        height3: 30),
   ];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       floatingActionButton: FloatingActionButton.large(
-        shape: CircleBorder(),
-        backgroundColor: Color(0xFF4C3528),
+        shape: const CircleBorder(),
+        backgroundColor: const Color(0xFF4C3528),
         onPressed: () {},
-        child: Icon(
+        child: const Icon(
           Icons.add,
           size: 40,
           color: Colors.white,
@@ -105,7 +148,7 @@ class _HomeScreenState extends State<HomeScreen> {
             alignment: Alignment.centerLeft,
             child: Text(
               "Monthly",
-              style: GoogleFonts.poppins(fontSize: 40),
+              style: GoogleFonts.josefinSans(fontSize: 40),
             ),
           ),
           SizedBox(
@@ -121,7 +164,6 @@ class _HomeScreenState extends State<HomeScreen> {
                   onTap: () {
                     setState(() {
                       selected_month = index;
-                      print(selected_month);
                     });
                   },
                   child: Padding(
@@ -142,7 +184,9 @@ class _HomeScreenState extends State<HomeScreen> {
                         child: Center(
                           child: Text(
                             data,
-                            style: GoogleFonts.lateef(fontSize: 32),
+                            style: GoogleFonts.poppins(
+                              fontSize: 24,
+                            ),
                           ),
                         ),
                       ),

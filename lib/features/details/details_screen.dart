@@ -1,13 +1,33 @@
-import 'package:diet_manager/features/details/model/data_model.dart';
-import 'package:diet_manager/features/details/widget/custom_card.dart';
-import 'package:diet_manager/features/details/widget/custom_container.dart';
-import 'package:diet_manager/router/router.dart';
+// ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'dart:ffi';
+
+import 'package:diet_manager/features/details/widget/bounce_animation.dart';
+import 'package:diet_manager/features/item/widget/custom_bounceanimation.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+import 'package:diet_manager/features/details/model/data_model.dart';
+import 'package:diet_manager/features/details/widget/custom_card.dart';
+import 'package:diet_manager/features/details/widget/custom_container.dart';
+import 'package:diet_manager/router/router.dart';
+
 class DetailsScreen extends StatefulWidget {
-  const DetailsScreen({super.key});
+  String value1;
+  double height1;
+  String value2;
+  double height2;
+  String value3;
+  double height3;
+  DetailsScreen({
+    Key? key,
+    required this.value1,
+    required this.height1,
+    required this.value2,
+    required this.height2,
+    required this.value3,
+    required this.height3,
+  }) : super(key: key);
 
   @override
   State<DetailsScreen> createState() => _DetailsScreenState();
@@ -76,29 +96,38 @@ class _DetailsScreenState extends State<DetailsScreen> {
               scrollDirection: Axis.horizontal,
               child: Row(
                 children: [
-                  CustomContainer(
-                    value: "34.5",
-                    color: const Color(0xFFB2A186),
-                    hastag: '#hungry',
-                    height: 120,
+                  ScaleFadeBounceAnimation(
+                    delay: 1,
+                    child: CustomContainer(
+                      value: widget.value1,
+                      color: const Color(0xFFB2A186),
+                      hastag: '#hungry',
+                      height: widget.height1,
+                    ),
                   ),
                   const SizedBox(
                     width: 10,
                   ),
-                  CustomContainer(
-                    value: "15.4",
-                    color: const Color(0xFFEAA33F),
-                    hastag: '#bored',
-                    height: 80,
+                  ScaleFadeBounceAnimation(
+                    delay: 2,
+                    child: CustomContainer(
+                      value: widget.value2,
+                      color: const Color(0xFFEAA33F),
+                      hastag: '#bored',
+                      height: widget.height2,
+                    ),
                   ),
                   const SizedBox(
                     width: 10,
                   ),
-                  CustomContainer(
-                    value: "8.3",
-                    color: const Color(0xFFF5D72F),
-                    hastag: '#depressed',
-                    height: 30,
+                  ScaleFadeBounceAnimation(
+                    delay: 3,
+                    child: CustomContainer(
+                      value: widget.value3,
+                      color: const Color(0xFFF5D72F),
+                      hastag: '#depressed',
+                      height: widget.height3,
+                    ),
                   ),
                 ],
               ),
@@ -134,11 +163,14 @@ class _DetailsScreenState extends State<DetailsScreen> {
                         onTap: () {
                           context.push(Routes.itemscreen.path, extra: data);
                         },
-                        child: CustomCard(
-                          image: data.image,
-                          name: data.name,
-                          date: data.date,
-                          cal: data.cal,
+                        child: BounceFromBottomAnimation(
+                          delay: index + 4 / 2,
+                          child: CustomCard(
+                            image: data.image,
+                            name: data.name,
+                            date: data.date,
+                            cal: data.cal,
+                          ),
                         ),
                       ));
                 },

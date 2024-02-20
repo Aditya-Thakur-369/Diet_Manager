@@ -1,15 +1,12 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first, must_be_immutable, unnecessary_const
+import 'package:diet_manager/features/item/widget/custom_bounceanimation.dart';
+import 'package:diet_manager/features/item/widget/expression_container.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-
 import 'package:diet_manager/features/details/model/data_model.dart';
-import 'package:flutter/rendering.dart';
-import 'package:flutter/scheduler.dart';
-import 'package:flutter/widgets.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:iconsax/iconsax.dart';
-import 'package:palette_generator/palette_generator.dart';
 import 'package:slider_button/slider_button.dart';
 
 class ItemScreen extends StatefulWidget {
@@ -24,6 +21,8 @@ class ItemScreen extends StatefulWidget {
 }
 
 class _ItemScreenState extends State<ItemScreen> {
+  Mode selecetedMode = Mode.hungry;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -54,23 +53,29 @@ class _ItemScreenState extends State<ItemScreen> {
                   )),
             ],
           ),
-          Container(
-            height: 250,
-            width: 250,
-            clipBehavior: Clip.antiAlias,
-            decoration: const BoxDecoration(shape: BoxShape.circle, boxShadow: [
-              BoxShadow(
-                  color: Colors.grey,
-                  blurStyle: BlurStyle.outer,
-                  blurRadius: 30,
-                  spreadRadius: 5)
-            ]),
-            child: Hero(
-                tag: widget.model.name,
-                child: Image.asset(
-                  widget.model.image,
-                  fit: BoxFit.cover,
-                )),
+          ScaleFadeBounceAnimation(
+            delay: 2,
+            child: Container(
+              height: 250,
+              width: 250,
+              clipBehavior: Clip.antiAlias,
+              decoration:
+                  const BoxDecoration(shape: BoxShape.circle, boxShadow: [
+                BoxShadow(
+                    color: Colors.grey,
+                    blurStyle: BlurStyle.outer,
+                    blurRadius: 30,
+                    spreadRadius: 5)
+              ]),
+              child:
+                  // Hero(
+                  //     tag: widget.model.name,
+                  Image.asset(
+                widget.model.image,
+                fit: BoxFit.cover,
+                // )
+              ),
+            ),
           ),
           const SizedBox(
             height: 50,
@@ -78,13 +83,13 @@ class _ItemScreenState extends State<ItemScreen> {
           Container(
             height: MediaQuery.sizeOf(context).height * 0.5 + 55,
             width: 430,
-            decoration: const BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.only(
+            decoration: BoxDecoration(
+                color: Theme.of(context).cardColor,
+                borderRadius: const BorderRadius.only(
                     topLeft: Radius.circular(60),
                     topRight: Radius.circular(60)),
-                boxShadow: [
-                  const BoxShadow(
+                boxShadow: const [
+                  BoxShadow(
                       color: Colors.grey,
                       blurRadius: 20,
                       blurStyle: BlurStyle.outer,
@@ -130,9 +135,9 @@ class _ItemScreenState extends State<ItemScreen> {
                             child: Text(
                               "28 Sep",
                               style: GoogleFonts.poppins(
-                                  fontSize: 40,
-                                  fontWeight: FontWeight.w600,
-                                  color: Colors.black),
+                                fontSize: 40,
+                                fontWeight: FontWeight.w600,
+                              ),
                             ),
                           ),
                         ),
@@ -194,47 +199,62 @@ class _ItemScreenState extends State<ItemScreen> {
                       height: 10,
                     ),
                     Padding(
-                      padding: const EdgeInsets.only(left: 16, right: 16),
+                      padding: const EdgeInsets.only(left: 6, right: 6),
                       child: Row(
                         children: [
-                          Container(
-                            height: 250,
-                            width: 150,
-                            decoration: BoxDecoration(
-                                color: const Color(0xFFE5DBC8),
-                                borderRadius: BorderRadius.circular(30)),
-                            child: Padding(
-                              padding: const EdgeInsets.all(18.0),
-                              child: Column(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Container(
-                                    height: 60,
-                                    width: 60,
-                                    decoration: BoxDecoration(
-                                        shape: BoxShape.circle,
-                                        color: Colors.transparent
-                                            .withOpacity(0.2)),
-                                    child: const Center(
-                                        child: Text(
-                                      "😠",
-                                      style: TextStyle(fontSize: 35),
-                                    )),
-                                  ),
-                                  Text("#hungry",
-                                      style: GoogleFonts.quicksand(
-                                          fontSize: 20,
-                                          fontWeight: FontWeight.w400))
-                                ],
-                              ),
+                          ScaleFadeBounceAnimation(
+                            delay: 1,
+                            child: GestureDetector(
+                              onTap: () {
+                                setState(() {
+                                  selecetedMode = Mode.hungry;
+                                });
+                              },
+                              child: ExpressionContainer(
+                                  selectedMode: selecetedMode == Mode.hungry,
+                                  exp: "😠",
+                                  text: "#hungry"),
+                            ),
+                          ),
+                          const SizedBox(
+                            width: 5,
+                          ),
+                          ScaleFadeBounceAnimation(
+                            delay: 2,
+                            child: GestureDetector(
+                              onTap: () {
+                                setState(() {
+                                  selecetedMode = Mode.bored;
+                                });
+                              },
+                              child: ExpressionContainer(
+                                  selectedMode: selecetedMode == Mode.bored,
+                                  exp: "😒",
+                                  text: "#bored"),
+                            ),
+                          ),
+                          const SizedBox(
+                            width: 5,
+                          ),
+                          ScaleFadeBounceAnimation(
+                            delay: 3,
+                            child: GestureDetector(
+                              onTap: () {
+                                setState(() {
+                                  selecetedMode = Mode.despressed;
+                                });
+                              },
+                              child: ExpressionContainer(
+                                  selectedMode:
+                                      selecetedMode == Mode.despressed,
+                                  exp: "😩",
+                                  text: "#depressed"),
                             ),
                           ),
                         ],
                       ),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 10,
                     ),
                     Align(
@@ -242,19 +262,23 @@ class _ItemScreenState extends State<ItemScreen> {
                       child: SliderButton(
                         width: 400,
                         height: 80,
+                        shimmer: false,
                         backgroundColor: const Color(0xFF4C3528),
                         buttonSize: 60,
-                        icon: const Icon(Icons.fastfood_rounded),
-                        buttonColor: Colors.white,
+                        icon: const Icon(
+                          Icons.fastfood_rounded,
+                          color: Colors.black,
+                        ),
                         action: () async {
-                          // context.pop();
                           ScaffoldMessenger.of(context).showSnackBar(
-                              SnackBar(content: Text("Item Added")));
+                              const SnackBar(
+                                  content: Text("Item added to diet !")));
+                          context.pop();
                         },
                         label: Text(
                           "Add Meal   >>>",
                           style: GoogleFonts.poppins(
-                              fontSize: 20,
+                              fontSize: 24,
                               fontWeight: FontWeight.w400,
                               color: Colors.white),
                         ),
@@ -269,3 +293,5 @@ class _ItemScreenState extends State<ItemScreen> {
     );
   }
 }
+
+enum Mode { hungry, bored, despressed }

@@ -1,4 +1,6 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first, must_be_immutable
+import 'package:diet_manager/features/details/widget/bounce_animation.dart';
+import 'package:diet_manager/features/item/widget/custom_bounceanimation.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -28,8 +30,10 @@ class CustomCard extends StatelessWidget {
             width: 120,
             clipBehavior: Clip.antiAlias,
             decoration: BoxDecoration(borderRadius: BorderRadius.circular(25)),
-            child:
-                Hero(tag: name, child: Image.asset(image, fit: BoxFit.cover)),
+            child: Hero(
+                tag: name,
+                child: ScaleFadeBounceAnimation(
+                    delay: 1, child: Image.asset(image, fit: BoxFit.cover))),
           ),
           const SizedBox(
             width: 20,
